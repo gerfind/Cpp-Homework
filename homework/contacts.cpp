@@ -13,8 +13,8 @@ typedef struct node{
     char address[200];//住址
     struct node *next;//next域
 }contact;
-//建立通讯录,将文件中的通讯录信息存储进链表
-contact *Read(){
+
+contact *Read(){//建立通讯录,将文件中的通讯录信息存储进链表
     contact *head,*temp,*s;
     FILE *fp;
     fp=fopen("通讯录.txt","r");//打开存储通讯录的文件
@@ -49,13 +49,7 @@ void search(contact *head) {//查找功能
                     temp = temp->next;//否则继续向下遍历
                 }
             }
-            if(flag>0){
-                printf("查找成功!\n");
-
-            }
-            else
-                printf("查找失败!\n");
-        break;
+            break;
         case 2://号码查找,思路同上，不再赘述
             printf("请输入电话号码：");
             scanf("%s", searPhoneNum);
@@ -67,12 +61,6 @@ void search(contact *head) {//查找功能
                 }
                 else{
                     temp = temp->next;
-                }
-                if(flag>0){
-                    printf("查找成功!\n");
-                }
-                else{
-                    printf("查找失败!\n");
                 }
             }
             break;
@@ -91,6 +79,12 @@ void search(contact *head) {//查找功能
             break;
         default:
             printf("格式错误!\n");
+    }
+    if(flag>0){
+        printf("查找成功!\n");
+    }
+    else{
+        printf("查找失败!\n");
     }
 }
 //增加新的联系人
@@ -114,23 +108,87 @@ void add(contact *head){
     s->next=NULL;
 }
 void Delete(contact *head){//删除符合条件的结点
-    contact *temp;//中吉街店
+    contact *temp;//中间结点
     char delNum[15],delName[20];//存储输入的号码姓名数据
     printf("请输入要删除的联系人姓名：");
     scanf("%s",delName);
     printf("请输入要删除的联系人电话：");
     scanf("%s",delNum);
-    while(head->next!=NULL){
-        if((strcmp(delNum,head->phoneNumber)==0)&&(strcmp(delName,head->name)==0)){//比较要删除的内容的
-            temp=head->next;
+    while(head->next!=NULL){//遍历链表
+        if((strcmp(delNum,head->phoneNumber)==0)&&(strcmp(delName,head->name)==0)){//比较判定是否为要删除对象
+            temp=head->next;//删除操作
             head->next=temp->next;
             return;
         }
         else{
-            head=head->next;
+            head=head->next;//继续便利
         }
     }
 printf("删除失败!\n");
+}
+void change(contact *head){//更新联系人
+    contact *temp=head;
+    int mode=0;
+    int flag=0;
+    char tempName[20],tempNum[15];//存储用于识别比较的原姓名及原号码
+    printf("请输入要更改的联系人姓名：");
+    scanf("%s",tempName);
+    printf("请输入要更改的联系人原电话：");
+    scanf("%s",tempNum);
+    printf("请输入要修改的内容,1为姓名,2为号码,3为住址：");
+    scanf("%d",&mode);
+    switch (mode) {
+        case 1:{
+            char changeName[20];
+            printf("请输入修改后的名字：");
+            scanf("%s",changeName);
+            while(temp->next!=NULL){
+                if ((strcmp(tempNum,temp->phoneNumber)==0)&&(strcmp(tempName,temp->name)==0)){
+                    strcpy(temp->name,changeName);
+                    flag=1;
+                    break;
+                }
+                else
+                    temp=temp->next;
+            }
+        }
+            break;
+        case 2: {
+            char changeNum[20];
+            printf("请输入修改后的号码：");
+            scanf("%s", changeNum);
+            while (temp->next != NULL) {
+                if ((strcmp(tempNum, temp->phoneNumber) == 0) && (strcmp(tempName, temp->name) == 0)) {
+                    strcpy(temp->phoneNumber, changeNum);
+                    flag = 1;
+                    break;
+                } else
+                    temp = temp->next;
+            }
+        }
+            break;
+        case 3:{
+            char changeAddress[200];
+            printf("请输入修改后的住址：");
+            scanf("%s", changeAddress);
+            while(temp->next!=NULL){
+                if ((strcmp(tempNum,temp->phoneNumber)==0)&&(strcmp(tempName,temp->name)==0)){
+                    strcpy(temp->address,changeAddress);
+                    flag=1;
+                    break;
+                }
+                else
+                    temp=temp->next;
+            }
+        }
+            break;
+    }
+    if(flag==1){
+        printf("修改成功!\n");
+    }
+    else{
+        printf("修改失败!\n");
+    }
 }
 void update(contact *head){//更新存储文件
     contact *s=head;

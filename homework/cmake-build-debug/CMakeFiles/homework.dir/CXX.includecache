@@ -7,6 +7,10 @@
 #IncludeRegexTransform: 
 
 D:/homework/contacts.cpp
-iostream
+stdio.h
+-
+string.h
+-
+stdlib.h
 -
 
