@@ -194,16 +194,20 @@ void change(contact *head){//更新联系人
         printf("修改失败!\n");
     }
 }
-void update(contact *head){//无法通过测试，请重新编写，现在暂时改成显示所有通讯录功能 
+void update(contact *head){//通过测试
     contact *s=head->next;
-    //FILE *fp1,*fp2;
-    //fp1=fopen("contacts.txt","w");
+    FILE *fp1;
+    fp1 = fopen("contacts.txt", "w");
     while(s!=0){
         printf("%s %s %s\n", s->name, s->phoneNumber, s->address);
-        //fprintf(fp1, "%s %s %s\n", s->name, s->phoneNumber, s->address);
+        if(s->next!=0)
+            fprintf(fp1, "%s %s %s\n", s->name, s->phoneNumber, s->address);
+        else
+            fprintf(fp1, "%s %s %s", s->name, s->phoneNumber, s->address);
         s=s->next;
     }
-    //printf("更新成功!\n");
+    fclose(fp1);
+    printf("更新成功!\n");
 }
 void SetNULL(contact *head){//链表和存储文件置空
     head=0;
@@ -212,20 +216,12 @@ void SetNULL(contact *head){//链表和存储文件置空
     fprintf(fp,"\n");
 }
 int main() {
-    /*
-    注意：为了防止问题出现和便于进行调试
-    我已经将通讯录.txt更改为contacts.txt
-    其中的测试已经将中文换成英文
-    以上所有通过测试的函数均为在此环境下进行的测试
-    现在还无法存储更改，因为update函数没法用，原因未知
-    另外，SetNULL函数不知道有啥用，故未使用
-    */
     printf("欢迎使用通讯录管理系统!");
     contact *headp;
     headp = Read();//读取文件
     while (1)
     {
-        printf("\n请选择接下来要进行的操作:\n1.查看全部通讯录\n2.增加联系人");
+        printf("\n请选择接下来要进行的操作:\n1.查看并保存全部通讯录\n2.增加联系人");
         printf("\n3.删除联系人\n4.查找联系人\n5.更改联系人\n6.关闭程序\n请输入:");
         //各个数字的功能如上
         int choose;
