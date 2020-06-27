@@ -111,6 +111,7 @@ int add(contact *head){
 int Delete(contact *head){
     //测试通过
     contact *temp;//中间结点
+    temp=head;
     char delNum[15],delName[20];//存储输入的号码姓名数据
     printf("请输入要删除的联系人姓名：");
     scanf("%s",delName);
@@ -118,8 +119,10 @@ int Delete(contact *head){
     scanf("%s",delNum);
     while(head->next!=0){//遍历链表
         if((strcmp(delNum,head->phoneNumber)==0)&&(strcmp(delName,head->name)==0)){//比较判定是否为要删除对象
-            temp=head->next;//删除操作
-            head->next=temp->next;
+            while(temp->next!=head)
+            	temp=temp->next;
+            temp->next=head->next;
+			free(head);//删除操作
             printf("删除成功");
             return 0;
         }
