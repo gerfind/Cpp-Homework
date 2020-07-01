@@ -1,0 +1,57 @@
+欢迎使用通讯录管理系统!
+请选择接下来要进行的操作:
+1.查看并保存全部通讯录
+2.增加联系人
+3.删除联系人
+4.查找联系人
+5.更改联系人
+6.关闭程序
+请输入:
+请选择接下来要进行的操作:
+1.查看并保存全部通讯录   
+2.增加联系人
+PS D:\GITHUB\Cpp-Homework> cd "d:\GITHUB\Cpp-Homework\" ; if ($?) { g++ 'contacts.cpp' -o 'contacts.exe' -Wall -g -O2 -static-libgcc -std=c++17 -fexec-charset=GBK } ; if 
+($?) { &'.\contacts' }
+contacts.cpp:6:1: warning: 'typedef' was ignored in this declaration
+ typedef struct contact{
+ ^~~~~~~
+contacts.cpp: In function 'int search(contact*)':
+contacts.cpp:87:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+contacts.cpp: In function 'int Delete(contact*)':
+contacts.cpp:134:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+欢迎使用通讯录管理系统!
+请选择接下来要进行的操作:
+1.查看并保存全部通讯录
+2.增加联系人
+3.删除联系人
+4.查找联系人
+5.更改联系人
+6.关闭程序
+请输入:2
+请输入要添加的联系人姓名、电话号码以及住址，以空格分隔：Jobs 56211625 Apple
+
+请选择接下来要进行的操作:
+1.查看并保存全部通讯录
+2.增加联系人
+3.删除联系人
+4.查找联系人
+5.更改联系人
+6.关闭程序
+请输入:1
+Jason 1919810 Xian
+Alex 1145141919 Guangzhou
+Jobs 56211625 Apple
+更新成功!
+
+请选择接下来要进行的操作:
+1.查看并保存全部通讯录
+2.增加联系人
+3.删除联系人
+4.查找联系人
+5.更改联系人
+6.关闭程序
+请输入:6
